@@ -1,8 +1,10 @@
 #!/bin/bash
 set -xue
 
-# QEMU file path
 QEMU=qemu-system-riscv32
 
+./build.sh
+
 # Start QEMU
-$QEMU -machine virt -bios default -nographic -serial mon:stdio --no-reboot
+$QEMU -machine virt -bios default -nographic -serial mon:stdio --no-reboot \
+    -kernel target/riscv32i-unknown-none-elf/release/os1k
