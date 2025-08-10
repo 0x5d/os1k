@@ -1,0 +1,14 @@
+[build]
+target = "riscv32i-unknown-none-elf"
+
+[target.riscv32i-unknown-none-elf]
+# linker = "rust-lld" # Use LLVM's linker.
+rustflags = [
+  "-C", "link-arg=-Tkernel.ld", # Use kernel.ld as linker script.
+  "-C", "link-arg=-nostdlib",   # Don't link against the C stdlib.
+]
+
+[unstable]
+# Build Rust's core library from source, as riscv32i-unknown-none-elf doesn't yet come a pre-built
+# core.
+build-std = ["core"]
