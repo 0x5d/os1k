@@ -5,5 +5,8 @@ edition = "2021"
 
 [dependencies]
 
+[lib]
+name = "os1k"
+
 [[bin]]
 name = "os1k"
