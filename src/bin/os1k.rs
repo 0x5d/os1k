@@ -52,9 +52,12 @@ pub unsafe fn kernel_main() {
     memset(__bss as *mut c_void, 0,  __bss_end - __bss);
     
     // Print Hello World! after boot.
-    let s = CStr::from_bytes_until_nul(b"\n\nHello World!\n\0").expect("input string didn't end with \\0");
-    let f = CStr::from_bytes_until_nul(b"%s\0").expect("input string didn't end with \\0");
+    let f = CStr::from_bytes_until_nul(b"\nHello %s\n\0").expect("input string didn't end with \\0");
+    let s = CStr::from_bytes_until_nul(b"World!\0").expect("input string didn't end with \\0");
     common::printf(f.as_ptr(), s.as_ptr());
+
+    let f = CStr::from_bytes_until_nul(b"1 + 2 = %d, %x\n\0").expect("input string didn't end with \\0");
+    common::printf(f.as_ptr(), 1 + 2, 0x1234abcd);
 
     loop {
         asm!("wfi")
